@@ -1,0 +1,53 @@
+<app-navigation></app-navigation>
+
+<div class="container">
+    <div class="columns">
+      <div class="column col-3 p-sticky">
+
+        <button class="btn btn-success" (click)="addChartMaker()">
+            <i class="icon icon-plus"></i> Add Chart
+        </button>
+
+        <div class="divider"></div>
+
+        <app-chart-maker 
+            (onChartCreation)="onTestClick($event)"
+            [chartMakerId]="cm.chartMakerId"
+            [editMode]="cm.editMode"
+            *ngFor="let cm of chartsApps"></app-chart-maker>
+        <div class="divider-vert"></div>
+      </div>
+      
+      <div class="column col-9">
+
+        <div class="empty" *ngIf="chartsMetaData.length === 0">
+            <div class="empty-icon">
+                <i class="icon icon-4x icon-stop"></i>
+            </div>
+            <p class="empty-title h5">You must set one or more charts in the left hand panel!!</p>
+            <p class="empty-subtitle">Set chart name, description, date range and pick some properties.</p>
+            <!-- <div class="empty-action">
+                <button class="btn btn-primary">Send a message</button>
+            </div> -->
+        </div>
+
+        
+                <div class="columns">
+                    
+                    <div class="column col-12">
+                        <app-chart-display 
+                            [data]="data"
+                            [cmd]="cmd" 
+                            *ngFor="let cmd of chartsMetaData"></app-chart-display>
+                    </div>
+                    
+                </div>
+      
+
+          
+        
+      </div>
+    </div>
+  </div>
+
+<router-outlet></router-outlet>

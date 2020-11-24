@@ -1,0 +1,70 @@
+<div class="columns" id="charty">
+            
+    <div class="column col-12">
+        <div class="panel" >
+            <div class="panel-header">
+              <div class="panel-title text-center">
+                  <h3>{{cmd.metaData.chartName}}</h3>
+              </div>
+            </div>
+            <div class="panel-nav">
+                <ul class="tab tab-block">
+                    <li class="tab-item">
+                      <a
+                        class="c-hand"
+                        [ngClass]="{'active': chartMode }"
+                        (click)="switchToChartMode()"
+                        >Chart</a>
+                    </li>
+                    <li class="tab-item">
+                      <a 
+                      class="c-hand"
+                      [ngClass]="{'active': !chartMode }"
+                      (click)="switchToDataMode()">Tabular Data</a>
+                    </li>
+                  </ul>
+            </div>
+            <div class="panel-body">
+
+                <canvas 
+                    *ngIf="chartMode"
+                    height="{{cmd.metaData.chartHeight}}"
+                    baseChart
+                    [datasets]="cmd.ngChart.datasets"
+                    [labels]="cmd.ngChart.labels"
+                    [legend]="cmd.ngChart.lineChartLegend"
+                    [chartType]="cmd.ngChart.lineChartType"></canvas>
+
+                <table class="table table-striped table-hover" 
+                    *ngIf="!chartMode">
+                    <thead>
+                      <tr>
+                        <th *ngFor="let md of dataTable.meta">
+                            {{md}}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="active"
+                        *ngFor="let row of dataTable.dataSet">
+                        <td *ngFor="let k of getKeys(row)">
+                            {{row[k]}}
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="panel-footer">
+                <div class="text-center">
+                    <p>
+                        {{cmd.metaData.chartDescription}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+       
+
+    </div>
+</div>

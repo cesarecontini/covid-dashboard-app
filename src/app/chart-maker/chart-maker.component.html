@@ -1,0 +1,92 @@
+<div class="panel">
+    <div class="panel-header">
+        <div class="panel-title" id="panel-title" (click)="toggleEditMode()">
+            <div>
+               <i 
+                [ngClass]="{'icon-arrow-down': editMode, 'icon-arrow-up': !editMode}"
+                id="edit-mode-icon"
+                class="icon icon-arrow-down"></i>&nbsp;&nbsp;<b>{{chartName}}</b>
+                <div>
+                    <span *ngIf="!editMode">{{chartDescription}}</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="panel-nav" *ngIf="editMode">
+        <!-- navigation components: tabs, breadcrumbs or pagination -->
+    </div>
+    <div class="panel-body" *ngIf="editMode">
+        <form>
+            <div class="form-group">
+                <label class="form-label label-sm" for="chartName">Chart Name</label>
+                <input 
+                        [(ngModel)]="chartName"
+                        name="chartName"
+                        class="form-input input-sm" type="text" 
+                        id="chartName" placeholder="Chart name">
+            </div>
+            <div class="form-group">
+                <label class="form-label label-sm" for="chartDes">Chart Descrtiption</label>
+                <textarea 
+                    [(ngModel)]="chartDescription"
+                    class="form-input input-sm" name="chartDes" id="chartDes" placeholder="Chart Descrtiption" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label label-sm" for="chartName">Chart Height</label>
+                <input 
+                        [(ngModel)]="chartHeight"
+                        name="chartHeight"
+                        class="form-input input-sm" type="number" 
+                        id="chartHeight" placeholder="Chart Height">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label label-sm" for="chart-type">Chart Type</label>
+                <select [(ngModel)]="chartType"
+                    name="chartType"
+                    id="chart-type" class="form-select select-sm">
+                  
+                  <option *ngFor="let ct of chartTypes" [ngValue]="ct.value" >{{ct.label}}</option>
+                  
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label label-sm" for="chartName">Date  Range ({{indexRangeTo - indexRangeFrom}} items)</label>
+                    <small>FROM: {{formatRangeDate('from')}}</small>
+                    <input 
+                        [(ngModel)]="indexRangeFrom"
+                        name="indexRangeFrom"
+                        (change)="onSliderChange()"
+                        class="slider" type="range" min="0" max="{{maxRange}}">
+                    <small>TO: {{formatRangeDate('to')}}</small>
+                    <input 
+                        [(ngModel)]="indexRangeTo"
+                        name="indexRangeTo"
+                        (change)="onSliderChange()"
+                        class="slider" type="range" min="0" max="{{maxRange}}">
+                    
+              </div>
+              <div class="form-group">
+                <label class="form-label label-sm" for="chart-type">Chart Properties</label>
+                <select [(ngModel)]="chartSelected"
+                    name="chartSelected"
+                    size="{{chartProperties.length}}"
+                    id="chart-selected" class="form-select select-sm" multiple>
+                  
+                  <option *ngFor="let cp of chartProperties" [ngValue]="cp.prop" >{{cp.label}}</option>
+                  
+                </select>
+              </div>
+        </form>
+        
+    </div>
+    <div class="panel-footer" *ngIf="editMode">
+        <button class="btn btn-success" 
+            [disabled]="chartSelected.length === 0"
+            (click)="sendChartDisplayArea()">
+            <i class="icon icon-check"></i> Generate Chart
+        </button>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<header class="navbar" id="navbar">
+    <section class="navbar-section">
+      <a href="/" class="navbar-brand mr-2"><b>COVID DASHBOARD APP</b></a>
+      <a class="c-hand" (click)="openAbout()" class="btn btn-link">About</a>
+    </section>
+    <!-- <section class="navbar-section">
+      <div class="input-group input-inline">
+        <input class="form-input" type="text" placeholder="search">
+        <button class="btn btn-primary input-group-btn">Search</button>
+      </div>
+    </section> -->
+</header>
+
+<div class="modal active" id="modal-id" *ngIf="displayAbout">
+  <a href="#close" class="modal-overlay" (click)="closeAbout()" aria-label="Close"></a>
+  <div class="modal-container">
+    <div class="modal-header">
+      <a class="c-hand" (click)="closeAbout()" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">COVID DASHBOARD APP</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+        Covid Dashboard App is a showcase Angular application developed by Cesare Giani Contini. It displays COVID-19 related data as provided in by the Italian Government in a line or bar chart fashion. It allows producing custom dashboard charts by picking date range and data specific properties.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="closeAbout()">Close</button>
+    </div>
+  </div>
+</div>
